@@ -3,29 +3,39 @@ import { NextRequest } from "next/server";
 import { SkillSchema } from "@/schema/zod";
 import { ZodError } from "zod";
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
-export async function GET() {
+export const GET = auth(async function GET(req) {
+  if (!req.auth)
+    return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
   try {
-    const skills = await prisma.skill.findMany();
+    const skills = await prisma.skill.findMany({
+      include: {
+        reflections: true,
+        task: true,
+      },
+    });
     return Response.json(skills);
   } catch (error) {
     console.error(error);
     throw new Error();
   }
-}
-export async function POST(req: NextRequest) {
+});
+export const POST = auth(async function POST(req) {
+  if (!req.auth)
+    return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
   try {
     const json = await req.json();
-    const body = SkillSchema.parse(json);
-    const user = await prisma.skill.create({
+    const { categoryId, ...body } = SkillSchema.parse(json);
+    const skill = await prisma.skill.create({
       data: {
         ...body,
-        Category: {
-          connect: { id: "01JZ6ERT7ZDCTPFVPPE5QB57T2" },
+        category: {
+          connect: { id: categoryId },
         },
       },
     });
-    return NextResponse.json(user, { status: 201 });
+    return NextResponse.json(skill, { status: 201 });
   } catch (error) {
     if (error instanceof ZodError) {
       console.error("Validation Error:", error.errors);
@@ -37,4 +47,4 @@ export async function POST(req: NextRequest) {
     console.error("Unhandled Error:", (error as Error).message);
     return NextResponse.json({ error: "Serverless error" }, { status: 500 });
   }
-}
+});
