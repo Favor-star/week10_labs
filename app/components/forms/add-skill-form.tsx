@@ -8,6 +8,7 @@ import { SkillSchema, SkillSchemaProps } from "@/schema/zod";
 import { useState, useEffect } from "react";
 import { Trash, Loader2, CheckCircle, TriangleAlert } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import optionList from "@/data/categories";
 export const AddSKillForm = () => {
   const [objectives, setObjectives] = useState<{ value: string; id: string }[]>(
     []
@@ -125,6 +126,7 @@ export const AddSKillForm = () => {
       )}
       <Select
         {...register("categoryId")}
+        optionsList={optionList}
         errorMessage={errors.categoryId && errors.categoryId.message}
       />
       {isSubmitSuccessful && (

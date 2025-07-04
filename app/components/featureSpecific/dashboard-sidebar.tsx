@@ -66,22 +66,22 @@ export const DashboardSidebar = () => {
 const links = [
   {
     label: "Dashboard",
-    href: "/dashboard",
+    href: "/vault",
     icon: ChartLine,
   },
   {
     label: "Add Skill",
-    href: "/dashboard/add-skill",
+    href: "/vault/add-skill",
     icon: Plus,
   },
   {
     label: "Profile",
-    href: "/dashboard/Profile",
+    href: "/vault/profile",
     icon: User,
   },
   {
     label: "Settings",
-    href: "/dashboard/settings",
+    href: "/vault/settings",
     icon: Settings,
   },
 ];

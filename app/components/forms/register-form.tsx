@@ -34,8 +34,7 @@ export const RegisterForm = () => {
       });
       const result = await res.json();
       if (result.message.includes("exists"))
-        setError("root", { message: "User already exists" });
-      console.log(result);
+        return setError("root", { message: "User already exists" });
       router.push("/login");
     } catch (error) {
       console.error(error);

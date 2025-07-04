@@ -11,8 +11,10 @@ export const SkillSchema = z.object({
 
 export const ReflectionSchema = z.object({
   content: z.string().min(1),
-  createdAt: z.date().optional(),
-  skillId: z.string().optional(),
+  mood: z.string().refine((val) => val !== "", {
+    message: "Please select a valid mood",
+  }),
+  skillId: z.string(),
 });
 export const CategorySchema = z.object({
   name: z.string().min(1),

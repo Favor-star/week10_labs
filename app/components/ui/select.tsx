@@ -1,17 +1,22 @@
 import { CategoriesProps } from "@/data/categories";
 import { FC, SelectHTMLAttributes } from "react";
-import optionList from "@/data/categories";
+
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   errorMessage?: string;
+  optionsList: CategoriesProps[];
 }
-export const Select: FC<SelectProps> = ({ errorMessage, ...props }) => {
+export const Select: FC<SelectProps> = ({
+  errorMessage,
+  optionsList,
+  ...props
+}) => {
   return (
     <div className="w-full">
       <label
         htmlFor={"categories"}
         className="flex items-center justify-between"
       >
-        Select a cateogry
+        Please choose
         <span className="text-xs text-red">{errorMessage}</span>
       </label>
       <select
@@ -20,8 +25,8 @@ export const Select: FC<SelectProps> = ({ errorMessage, ...props }) => {
         defaultValue={""}
         {...props}
       >
-        <option value={""}>Choose a category</option>
-        {optionList.map(({ id, name }) => (
+        <option value={""}>Choose</option>
+        {optionsList.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}
           </option>

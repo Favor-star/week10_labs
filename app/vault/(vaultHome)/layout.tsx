@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { DashboardSidebar } from "../components/featureSpecific/dashboard-sidebar";
-import DashboardHeader from "../components/featureSpecific/dashboard-header";
-import { Providers } from "../providers/Providers";
+import { DashboardSidebar } from "@/app/components/featureSpecific/dashboard-sidebar";
+import DashboardHeader from "@/app/components/featureSpecific/dashboard-header";
+import { Providers } from "@/app/providers/Providers";
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (
@@ -12,7 +12,7 @@ const layout = ({ children }: { children: ReactNode }) => {
           <DashboardHeader />
 
           {children}
-        </div>{" "}
+        </div>
       </Providers>
     </section>
   );

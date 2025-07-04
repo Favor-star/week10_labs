@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import { Plus, MoveRight, SquarePen, Trash } from "lucide-react";
 export const SkillsReflectionCard = () => {
   return (
-    <div className="w-full flex gap-3 flex-col items-center">
+    <div className="w-full flex gap-3 p-3 flex-col items-center">
       <div className="w-full flex justify-between items-center py-2">
         <p className="text-xl  font-bold">Learning reflections</p>
         <Button>
@@ -23,7 +23,7 @@ export const SkillsReflectionCard = () => {
   );
 };
 
-const ReflectionCard = () => {
+export const ReflectionCard = () => {
   return (
     <div className="w-full flex flex-col justify-center gap-2  py-2 px-3 border  border-secondary-xl rounded-xl">
       <div className="flex items-center justify-between gap-2">

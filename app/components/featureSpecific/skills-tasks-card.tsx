@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 
 export const SkillsTasksCard = () => {
   return (
-    <div className="w-full flex gap-3 flex-col items-center">
+    <div className="w-full flex gap-3 flex-col p-3 items-center">
       <div className="w-full flex justify-between items-center py-2">
         <p className="text-xl  font-bold">Tasks</p>
         <Button>

@@ -1,5 +1,5 @@
 import React from "react";
-import { VaultNavbar } from "../components/featureSpecific/vault-navbar";
+import { VaultNavbar } from "@/app/components/featureSpecific/vault-navbar";
 
 const layout = ({ children }: { children: string }) => {
   return (
