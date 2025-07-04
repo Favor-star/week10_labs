@@ -1,11 +1,22 @@
 import { SkillTitleCard } from "@/app/components/featureSpecific/skill-title-card";
 import { SkillsContentTabs } from "@/app/components/featureSpecific/skills-content-tabs";
+import { cookies } from "next/headers";
 
-const page = () => {
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.NEXT_URL}/api/skills/${id}`, {
+    headers: {
+      cookie: cookieStore.toString(),
+    },
+    cache: "force-cache",
+  });
+  const data = await res.json();
+
   return (
     <div className="mt-10 space-y-8">
-      <SkillTitleCard />
-      <SkillsContentTabs />
+      <SkillTitleCard data={data} />
+      <SkillsContentTabs data={data} />
     </div>
   );
 };

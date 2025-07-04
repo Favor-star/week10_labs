@@ -1,13 +1,15 @@
 "use client";
-import React, { createElement, useState } from "react";
+import React, { createElement, FC, useState } from "react";
 import { SkillObjectiveCard } from "@/app/components/featureSpecific/skill-objective-card";
 import { SkillsTasksCard } from "@/app/components/featureSpecific/skills-tasks-card";
 import { ListCheck, Lightbulb, Info } from "lucide-react";
 import { SkillsReflectionCard } from "@/app/components/featureSpecific/skills-reflection-card";
 import { cn } from "@/lib";
+import { Skill } from "@/generated/prisma";
 
-export const SkillsContentTabs = () => {
+export const SkillsContentTabs: FC<{ data: Skill }> = ({ data }) => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const { objectives } = data;
   return (
     <section className=" rounded-xl bg-secondary border border-secondary-l ">
       <div className="w-full  border-b px-3 flex gap-3 items-center border-secondary-l">
@@ -26,7 +28,7 @@ export const SkillsContentTabs = () => {
           </button>
         ))}
       </div>
-      {createElement(tabsCard[activeTabIndex])}
+      {createElement(tabsCard[activeTabIndex], { data })}
       {/* <div className="w-full p-2"></div> */}
     </section>
   );

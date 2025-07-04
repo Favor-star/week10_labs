@@ -1,25 +1,18 @@
+import { Skill } from "@/generated/prisma";
 import { CheckCircle2, Circle, Info, Lightbulb, ListCheck } from "lucide-react";
-export const SkillObjectiveCard = () => {
+import { FC } from "react";
+export const SkillObjectiveCard: FC<{ data: Skill }> = ({ data }) => {
+  const { objectives } = data;
   return (
     <div className="w-full flex flex-col md:flex-row p-3 gap-8 justify-between">
-      <div className=" space-y-2 w-full">
+      <div className=" space-y-3 w-full">
         <h3 className="font-bold text-xl">Learning objectives</h3>
-        <p className="space-x-3 flex ">
-          <CheckCircle2 strokeWidth={1.3} className="text-green" />
-          <span>Understand React fundamentals and JSX syntax</span>
-        </p>
-        <p className="space-x-3 flex ">
-          <CheckCircle2 strokeWidth={1.3} className="text-green" />
-          <span>Understand React fundamentals and JSX syntax</span>
-        </p>
-        <p className="space-x-3 flex ">
-          <CheckCircle2 strokeWidth={1.3} className="text-green" />
-          <span>Understand React fundamentals and JSX syntax</span>
-        </p>
-        <p className="space-x-3 flex ">
-          <Circle strokeWidth={1.3} className="text-white" />
-          <span>Understand React fundamentals and JSX syntax</span>
-        </p>
+        {objectives.map((obj) => (
+          <p className="space-x-3 flex " key={obj.split(" ")[1]}>
+            <CheckCircle2 strokeWidth={1.3} className="text-green" />
+            <span>{obj}</span>
+          </p>
+        ))}
       </div>
       <div className="w-full max-w-4/12 space-y-3">
         <h3 className="font-bold text-xl">Progress</h3>

@@ -1,14 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 import { Button } from "../ui/button";
 import { SquarePen, Trash } from "lucide-react";
+import { Skill } from "@/generated/prisma";
 
-export const SkillTitleCard = () => {
+export const SkillTitleCard: FC<{ data: Skill }> = ({ data }) => {
+  const { id, title, description, createdAt } = data;
   return (
     <div className="p-5 rounded-xl bg-secondary border border-secondary-l flex flex-col gap-4">
       <div className="flex md:flex-row flex-col gap-3 justify-between items-center">
-        <p className="font-extrabold text-2xl md:text-3xl ">
-          ReactJS Development
-        </p>
+        <p className="font-extrabold text-2xl md:text-3xl ">{title}</p>
         <div className="flex gap-3">
           <Button className="">
             <SquarePen strokeWidth={1.5} />
@@ -21,9 +21,7 @@ export const SkillTitleCard = () => {
         </div>
       </div>
       <p className="text-base md:text-lg text-secondary-xxl w-full md:w-11/12 text-balance md:text-wrap">
-        Master modern React.js development including hooks, state management,
-        component architecture, and best practices for building scalable web
-        applications.
+        {description}
       </p>
       <div className="w-full space-x-3 md:space-x-20">
         <div className="inline-block p-2 text-sm md:text-base bg-green/20 text-green rounded-lg space-x-2">
@@ -32,7 +30,7 @@ export const SkillTitleCard = () => {
         </div>
         <p className="inline-block mt-2 text-secondary-xxl">
           <span>Started: </span>
-          <span>March 15, 2025 </span>
+          <span>{new Date(createdAt).toDateString()} </span>
         </p>
       </div>
     </div>

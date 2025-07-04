@@ -13,6 +13,10 @@ export async function GET(
       where: {
         id,
       },
+      include: {
+        reflections: true,
+        task: true,
+      },
     });
     if (!skill)
       return NextResponse.json(

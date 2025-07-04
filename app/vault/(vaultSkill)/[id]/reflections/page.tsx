@@ -4,21 +4,41 @@ import {
 } from "@/app/components/featureSpecific/skills-reflection-card";
 import { SkillSubtitleCard } from "@/app/components/featureSpecific/skills-subtittle-card";
 import { AddReflectionForm } from "@/app/components/forms/add-reflection-form";
-import React from "react";
-
-const page = () => {
+import { Reflection, Skill } from "@/generated/prisma";
+import { cookies } from "next/headers";
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const cookieStore = await cookies();
+  const res = await fetch(`${process.env.NEXT_URL}/api/skills/${id}`, {
+    headers: {
+      cookie: cookieStore.toString(),
+    },
+    cache: "force-cache",
+  });
+  const data: Skill = await res.json();
+  //@ts-ignore
+  const reflections: Reflection[] = data.reflections;
   return (
     <div className="mt-10 space-y-8">
-      <SkillSubtitleCard />
+      <SkillSubtitleCard
+        title={data.title}
+        startedAt={data.startedAt}
+        progess={data.progress}
+      />
       <div className="w-full  flex flex-col gap-3">
         <AddReflectionForm />
         <div className="w-full"></div>
         <p className="text-xl  font-bold py-4">Recent reflections</p>
-        {Array(8)
-          .fill(null)
-          .map((_, i) => (
-            <ReflectionCard key={i} />
+        {reflections.length > 9 &&
+          reflections.map((reflection) => (
+            <ReflectionCard key={reflection.id} reflection={reflection} />
           ))}
+
+        {reflections.length === 0 && (
+          <p className="p-2 w-full text-start  text-white/70 italic">
+            No reflections added yet
+          </p>
+        )}
       </div>
     </div>
   );
