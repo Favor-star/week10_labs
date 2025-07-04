@@ -1,25 +1,32 @@
-import React from "react";
-
-export const Select = () => {
+import { CategoriesProps } from "@/data/categories";
+import { FC, SelectHTMLAttributes } from "react";
+import optionList from "@/data/categories";
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  errorMessage?: string;
+}
+export const Select: FC<SelectProps> = ({ errorMessage, ...props }) => {
   return (
-    <form className="w-full">
+    <div className="w-full">
       <label
         htmlFor={"categories"}
         className="flex items-center justify-between"
       >
         Select a cateogry
-        <span className="text-xs text-red">{"error Message"}</span>
+        <span className="text-xs text-red">{errorMessage}</span>
       </label>
       <select
         id="categories"
         className="bg-secondary-l border border-secondary-xl  rounded-lg p-3   block w-full"
+        defaultValue={""}
+        {...props}
       >
-        <option selected>Choose a category</option>
-        <option value="US">Backend Development</option>
-        <option value="CA">Frontend development</option>
-        <option value="FR">DevOps</option>
-        <option value="DE">UI/UX</option>
+        <option value={""}>Choose a category</option>
+        {optionList.map(({ id, name }) => (
+          <option key={id} value={id}>
+            {name}
+          </option>
+        ))}
       </select>
-    </form>
+    </div>
   );
 };

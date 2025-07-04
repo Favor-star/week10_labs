@@ -1,12 +1,12 @@
-import { z } from "zod";
-import { email } from "zod/v4";
+import { z } from "zod/v4";
 
 export const SkillSchema = z.object({
-  title: z.string().min(1),
-  description: z.string().min(1),
-  hasStarted: z.boolean().optional(),
-  progress: z.number().optional(),
-  categoryId: z.string(),
+  title: z.string().min(1, { message: "Skill title is required" }),
+  description: z.string().min(1, { message: "Description is required" }),
+  categoryId: z.string().refine((val) => val !== "", {
+    message: "Please select a valid category",
+  }),
+  objectives: z.array(z.string()).optional(),
 });
 
 export const ReflectionSchema = z.object({
@@ -21,7 +21,7 @@ export const CategorySchema = z.object({
 export const RegisterSchema = z
   .object({
     name: z.string().nonempty({ message: "Name is required" }),
-    email: z.string().email(),
+    email: z.email(),
     password: z.string().min(5, { message: "5 minimum characters" }),
     confirmPassword: z.string().optional(),
   })
@@ -30,7 +30,7 @@ export const RegisterSchema = z
     path: ["confirmPassword"],
   });
 export const LoginSchema = z.object({
-  email: z.string().nonempty({ message: "Email is required" }).email(),
+  email: z.email().nonempty({ message: "Email is required" }),
   password: z.string().min(1, { message: "Password is required" }),
 });
 

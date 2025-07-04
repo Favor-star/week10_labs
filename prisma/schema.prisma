@@ -79,8 +79,8 @@ model Skill {
   startedAt   DateTime     @default(now())
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
-  User        User?        @relation(fields: [userId], references: [id])
-  userId      String?
+  user        User         @relation(fields: [userId], references: [id])
+  userId      String
   category    Category     @relation(fields: [categoryId], references: [id])
   categoryId  String
 }
@@ -98,8 +98,8 @@ model Task {
   id        String   @id @default(ulid())
   title     String
   isDone    Boolean  @default(false)
-  skill     Skill?   @relation(fields: [skillId], references: [id])
-  skillId   String?
+  skill     Skill    @relation(fields: [skillId], references: [id])
+  skillId   String
   dueDate   DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

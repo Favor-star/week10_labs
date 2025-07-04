@@ -9,10 +9,14 @@ export const GET = auth(async function GET(req) {
   if (!req.auth)
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
   try {
+    const userId = req.auth.user?.id;
     const skills = await prisma.skill.findMany({
       include: {
         reflections: true,
         task: true,
+      },
+      where: {
+        userId,
       },
     });
     return Response.json(skills);
@@ -21,10 +25,12 @@ export const GET = auth(async function GET(req) {
     throw new Error();
   }
 });
+
 export const POST = auth(async function POST(req) {
   if (!req.auth)
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
   try {
+    const userId = req.auth.user?.id;
     const json = await req.json();
     const { categoryId, ...body } = SkillSchema.parse(json);
     const skill = await prisma.skill.create({
@@ -32,6 +38,9 @@ export const POST = auth(async function POST(req) {
         ...body,
         category: {
           connect: { id: categoryId },
+        },
+        user: {
+          connect: { id: userId },
         },
       },
     });
