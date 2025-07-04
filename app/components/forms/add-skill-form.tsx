@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { Trash, Loader2, CheckCircle, TriangleAlert } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import optionList from "@/data/categories";
+import { RootErrorCard } from "../common/root-error-card";
 export const AddSKillForm = () => {
   const [objectives, setObjectives] = useState<{ value: string; id: string }[]>(
     []
@@ -135,11 +136,8 @@ export const AddSKillForm = () => {
           <p className="font-medium ">Skill was added successfully</p>
         </div>
       )}
-      {errors.root && (
-        <div className="flex transition-all items-center gap-2 justify-start text-red bg-red/20 border border-red p-3 py-4 rounded-xl">
-          <TriangleAlert strokeWidth={1.4} size={30} />
-          <p className="font-medium ">{errors.root.message}</p>
-        </div>
+      {errors.root?.message && (
+        <RootErrorCard errorMessage={errors.root.message} />
       )}
       <div className="w-fit space-x-4 mt-5 block">
         <Button className="inline-flex px-5 bg-secondary-l">Clear</Button>

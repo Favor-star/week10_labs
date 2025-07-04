@@ -8,6 +8,7 @@ import { RegisterSchema, RegisterSchemaProps } from "@/schema/zod";
 import { Loader2, TriangleAlert } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { RootErrorCard } from "../common/root-error-card";
 
 export const RegisterForm = () => {
   const router = useRouter();
@@ -77,11 +78,8 @@ export const RegisterForm = () => {
         {...register("confirmPassword")}
         errorMessage={errors.confirmPassword && errors.confirmPassword.message}
       />
-      {errors.root && (
-        <div className="bg-red/20 border-red/50 border text-red  flex gap-2 items-center p-3 rounded-xl">
-          <TriangleAlert size={20} strokeWidth={1.3} />
-          {errors.root && errors.root.message}
-        </div>
+      {errors.root?.message && (
+        <RootErrorCard errorMessage={errors.root.message} />
       )}
       <Button className="w-full" disabled={isSubmitting} type="submit">
         {isSubmitting && (

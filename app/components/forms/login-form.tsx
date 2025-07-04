@@ -6,8 +6,9 @@ import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, LoginSchemaProps } from "@/schema/zod";
-import { TriangleAlert, Loader2 } from "lucide-react";
-import { signIn, useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { RootErrorCard } from "../common/root-error-card";
 
 export const LoginForm = () => {
   const {
@@ -65,11 +66,8 @@ export const LoginForm = () => {
         />
         Remember me
       </label>
-      {errors.root && (
-        <div className="bg-red/20 border-red/50 border text-red  flex gap-2 items-center p-3 rounded-xl">
-          <TriangleAlert size={20} strokeWidth={1.3} />
-          {errors.root && errors.root.message}
-        </div>
+      {errors.root?.message && (
+        <RootErrorCard errorMessage={errors.root.message} />
       )}
       <Button className="w-full" disabled={isSubmitting} type="submit">
         {isSubmitting && (

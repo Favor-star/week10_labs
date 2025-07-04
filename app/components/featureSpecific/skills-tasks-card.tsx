@@ -4,28 +4,30 @@ import { Button } from "../ui/button";
 
 export const SkillsTasksCard = () => {
   return (
-    <div className="w-full flex gap-3 flex-col p-3 items-center">
-      <div className="w-full flex justify-between items-center py-2">
-        <p className="text-xl  font-bold">Tasks</p>
+    <>
+      <div className="w-full flex gap-3 flex-col p-3 items-center">
+        <div className="w-full flex justify-between items-center py-2">
+          <p className="text-xl  font-bold">Tasks</p>
+          <Button>
+            <Plus size={18} strokeWidth={1.4} />
+            Add a task
+          </Button>
+        </div>
+        {Array(4)
+          .fill("")
+          .map((_, i) => (
+            <TaskCard key={i} />
+          ))}
         <Button>
-          <Plus size={18} strokeWidth={1.4} />
-          Add a task
+          View More
+          <MoveRight strokeWidth={1.4} />
         </Button>
-      </div>
-      {Array(4)
-        .fill("")
-        .map((_, i) => (
-          <TaskCard key={i} />
-        ))}
-      <Button>
-        View More
-        <MoveRight strokeWidth={1.4} />
-      </Button>
-    </div>
+      </div>{" "}
+    </>
   );
 };
 
-const TaskCard = () => {
+export const TaskCard = () => {
   return (
     <div className="w-full flex justify-between gap-2 items-center py-2 px-3 border  border-secondary-xl rounded-xl">
       <div className="flex items-center gap-2">

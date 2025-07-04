@@ -10,14 +10,21 @@ export const SkillSchema = z.object({
 });
 
 export const ReflectionSchema = z.object({
-  content: z.string().min(1),
+  content: z.string().min(1, { message: "This field is required" }),
   mood: z.string().refine((val) => val !== "", {
     message: "Please select a valid mood",
   }),
-  skillId: z.string(),
+  skillId: z.string().optional(),
 });
 export const CategorySchema = z.object({
   name: z.string().min(1),
+});
+export const TaskSchema = z.object({
+  title: z.string().min(1, { message: "The title is required" }),
+  dueDate: z
+    .string()
+    .refine((val) => val !== "", { message: "Date is required" }),
+  skillId: z.string().optional(),
 });
 
 export const RegisterSchema = z
@@ -36,6 +43,7 @@ export const LoginSchema = z.object({
   password: z.string().min(1, { message: "Password is required" }),
 });
 
+export type TaskSchemaProps = z.infer<typeof TaskSchema>;
 export type RegisterSchemaProps = z.infer<typeof RegisterSchema> & {
   confirmPassword?: string;
 };
