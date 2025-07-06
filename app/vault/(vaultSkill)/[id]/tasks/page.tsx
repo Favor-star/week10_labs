@@ -3,6 +3,7 @@ import { TaskCard } from "@/app/components/featureSpecific/skills-tasks-card";
 import { AddTaskForm } from "@/app/components/forms/add-task-form";
 import { Skill, Task } from "@/generated/prisma";
 import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -13,20 +14,22 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     },
     cache: "force-cache",
   });
+  if (!res.ok) notFound();
   const data: Skill = await res.json();
 
   //@ts-ignore
   const task: Task[] = await data.task;
-  
+
   return (
     <div className="mt-10 space-y-8">
       <SkillSubtitleCard
+        id={data.id}
         title={data.title}
         startedAt={data.startedAt}
         progess={data.progress}
       />
       <div className="w-full  flex flex-col gap-3">
-        <AddTaskForm />
+        <AddTaskForm skillId={data.id} />
         <div className="w-full"></div>
         <p className="text-xl  font-bold py-4">Recent tasks</p>
         {task.length > 0 &&

@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const category = await prisma.category.create({
       data: body,
     });
-    return Response.json(category);
+    return NextResponse.json(category);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   try {
     const category = await prisma.category.findMany();
-    return Response.json(category);
+    return NextResponse.json(category);
   } catch (error) {
     console.error(error);
   }

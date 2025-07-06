@@ -14,9 +14,9 @@ export const SkillTitleCard: FC<{ data: Skill }> = ({ data }) => {
             <SquarePen strokeWidth={1.5} />
             Edit
           </Button>
-          <Button className="Delete bg-transparent border border-red text-red">
+          <Button className=" bg-transparent border border-red text-red">
             <Trash strokeWidth={1.5} />
-            Edit
+            Delete
           </Button>
         </div>
       </div>

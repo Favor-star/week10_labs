@@ -3,12 +3,13 @@ import { FC } from "react";
 import { Button } from "../ui/button";
 import { MoveLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link";
 export const SkillSubtitleCard: FC<{
   title: string;
   startedAt: Date;
   progess: number;
-}> = ({ title, startedAt, progess }) => {
+  id: string;
+}> = ({ title, startedAt, progess, id }) => {
   const router = useRouter();
   return (
     <div className="p-5 rounded-xl bg-secondary border border-secondary-l flex flex-col gap-4">
@@ -22,13 +23,12 @@ export const SkillSubtitleCard: FC<{
             <SquarePen strokeWidth={1.5} />
             Edit
           </Button> */}
-          <Button
-            className=" inline-flex text-white text-nowrap bg-white/20 "
-            onClick={() => router.back()}
-          >
-            <MoveLeft strokeWidth={1.5} />
-            Back to Skill
-          </Button>
+          <Link href={`/vault/${id}`}>
+            <Button className=" inline-flex text-white text-nowrap bg-white/20 ">
+              <MoveLeft strokeWidth={1.5} />
+              Back to Skill
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="w-full space-x-3 md:space-x-20">

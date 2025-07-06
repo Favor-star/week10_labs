@@ -6,6 +6,7 @@ import { SkillSubtitleCard } from "@/app/components/featureSpecific/skills-subti
 import { AddReflectionForm } from "@/app/components/forms/add-reflection-form";
 import { Reflection, Skill } from "@/generated/prisma";
 import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const cookieStore = await cookies();
@@ -15,6 +16,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     },
     cache: "force-cache",
   });
+  if (!res.ok) notFound();
   const data: Skill = await res.json();
   //@ts-ignore
   const reflections: Reflection[] = data.reflections;
@@ -24,12 +26,13 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         title={data.title}
         startedAt={data.startedAt}
         progess={data.progress}
+        id={data.id}
       />
       <div className="w-full  flex flex-col gap-3">
-        <AddReflectionForm />
+        <AddReflectionForm skillId={data.id} />
         <div className="w-full"></div>
         <p className="text-xl  font-bold py-4">Recent reflections</p>
-        {reflections.length > 9 &&
+        {reflections.length > 0 &&
           reflections.map((reflection) => (
             <ReflectionCard key={reflection.id} reflection={reflection} />
           ))}

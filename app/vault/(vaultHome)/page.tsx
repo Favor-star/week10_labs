@@ -2,6 +2,7 @@ import { Skill } from "@/generated/prisma";
 import { cookies } from "next/headers";
 import { DashboardSkillCard } from "@/app/components/featureSpecific/dashboard-skill-card";
 import { DashboardSummaryCard } from "@/app/components/featureSpecific/dashboard-summary-card";
+import { notFound } from "next/navigation";
 
 const page = async () => {
   const cookieStore = await cookies();
@@ -11,8 +12,9 @@ const page = async () => {
     },
     cache: "force-cache",
   });
+  if (!res.ok) notFound();
   const data: Skill[] = await res.json();
- 
+
   return (
     <section className="p-5">
       <div className="w-full grid gap-4 grid-cols-4">
