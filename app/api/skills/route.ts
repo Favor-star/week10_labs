@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest } from "next/server";
 import { SkillSchema } from "@/schema/zod";
 import { ZodError } from "zod";
 import { NextResponse } from "next/server";

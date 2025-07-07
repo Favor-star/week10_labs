@@ -10,11 +10,11 @@ import { Modal } from "../common/modal";
 import { SkillEditForm } from "../forms/skill-edit-form";
 
 export const DashboardSkillCard: FC<{ data: Skill }> = ({ data }) => {
-  const { id, progress, title, categoryId } = data;
+  const { id, title, categoryId } = data;
   const category = categoriesList.filter((cat) => cat.id === categoryId)[0];
-  //@ts-ignore
+  //@ts-expect-error
   const completedTasks = data.task.filter((data: Task) => data.isDone);
-  //@ts-ignore
+  //@ts-expect-error
   const tasks: Task[] = data.task;
   const { handleCloseModal, handleOpenModal, isModalOpen } = useModal();
   const {

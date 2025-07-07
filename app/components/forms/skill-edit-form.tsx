@@ -6,7 +6,7 @@ import { Textarea } from "../ui/textarea";
 import { SkillSchemaProps } from "@/schema/zod";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Trash, Loader2, CheckCircle } from "lucide-react";
+import {  Loader2, CheckCircle } from "lucide-react";
 import { Select } from "../ui/select";
 import optionList from "@/data/categories";
 import { RootErrorCard } from "../common/root-error-card";

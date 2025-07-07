@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { Button } from "../ui/button";
-import { Plus, MoveRight, SquarePen, Trash } from "lucide-react";
+import { Plus, MoveRight } from "lucide-react";
 import { Reflection, Skill } from "@/generated/prisma";
 import Link from "next/link";
 import { ReflectionCard } from "../common/reflection-card";
 
 export const SkillsReflectionCard: FC<{ data: Skill }> = ({ data }) => {
   const { id } = data;
-  //@ts-ignore
+  //@ts-expect-error
   const reflections: Reflection[] = data.reflections;
   return (
     <div className="w-full flex gap-3 p-3 flex-col items-center">

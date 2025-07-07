@@ -9,7 +9,6 @@ import { Skill } from "@/generated/prisma";
 
 export const SkillsContentTabs: FC<{ data: Skill }> = ({ data }) => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const { objectives } = data;
   return (
     <section className=" rounded-xl bg-secondary border border-secondary-l ">
       <div className="w-full  border-b px-3 flex gap-3 items-center border-secondary-l">

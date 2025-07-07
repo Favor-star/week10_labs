@@ -1,5 +1,5 @@
 import { Skill } from "@/generated/prisma";
-import { CheckCircle2, Circle, Info, Lightbulb, ListCheck } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { FC } from "react";
 export const SkillObjectiveCard: FC<{ data: Skill }> = ({ data }) => {
   const { objectives } = data;

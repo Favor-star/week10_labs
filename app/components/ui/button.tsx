@@ -1,5 +1,5 @@
+"use client";
 import { cn } from "@/lib";
-import { ClassValue } from "clsx";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

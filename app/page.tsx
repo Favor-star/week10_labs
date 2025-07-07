@@ -1,4 +1,4 @@
-import { BrainCircuit, LinkIcon, LogIn, UserPlus } from "lucide-react";
+import { BrainCircuit, LogIn, UserPlus } from "lucide-react";
 import { Button } from "./components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";

@@ -1,4 +1,3 @@
-import { SkillsReflectionCard } from "@/app/components/featureSpecific/skills-reflection-card";
 import { ReflectionCard } from "@/app/components/common/reflection-card";
 import { SkillSubtitleCard } from "@/app/components/featureSpecific/skills-subtittle-card";
 import { AddReflectionForm } from "@/app/components/forms/add-reflection-form";

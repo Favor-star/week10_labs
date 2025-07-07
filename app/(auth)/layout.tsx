@@ -1,4 +1,4 @@
-import { BrainCircuit, Camera } from "lucide-react";
+import { BrainCircuit } from "lucide-react";
 import { ReactNode } from "react";
 import { Providers } from "../providers/Providers";
 

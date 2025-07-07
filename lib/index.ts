@@ -1,4 +1,3 @@
-import { RegisterSchemaProps } from "@/schema/zod";
 import bcrypt from "bcryptjs";
 import clsx from "clsx";
 import { ClassValue } from "clsx";

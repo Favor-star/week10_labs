@@ -20,7 +20,7 @@ const page = async () => {
   );
   const data: Skill[] = await res.json();
 
-  //@ts-ignore
+  //@ts-expect-error
   const tasks: Task[] = data.flatMap((data) => data.task);
   const completedTasks = tasks.filter(({ isDone }) => isDone);
   const startedSkills = data.filter(({ hasStarted }) => hasStarted);

@@ -1,10 +1,9 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { ReflectionSchemaProps, TaskSchemaProps } from "@/schema/zod";
+import { ReflectionSchemaProps } from "@/schema/zod";
 import { FC, useState, useEffect } from "react";
-import { Reflection, Task } from "@/generated/prisma";
+import { Reflection } from "@/generated/prisma";
 import { RootErrorCard } from "../common/root-error-card";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -67,7 +66,7 @@ export const ReflectionEditForm: FC<{
         handleCloseModal();
       }, 2500);
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, handleCloseModal, reset, reflection]);
   return (
     <form
       className="w-full  border flex flex-col gap-5 bg-secondary p-3 rounded-xl border-secondary-xl"

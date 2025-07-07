@@ -2,15 +2,13 @@
 import { FC } from "react";
 import { Button } from "../ui/button";
 import { MoveLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 export const SkillSubtitleCard: FC<{
   title: string;
   startedAt: Date;
   progess: number;
   id: string;
-}> = ({ title, startedAt, progess, id }) => {
-  const router = useRouter();
+}> = ({ title, startedAt,  id }) => {
   return (
     <div className="p-5 rounded-xl bg-secondary border border-secondary-l flex flex-col gap-4">
       <div className="flex md:flex-row flex-col gap-3 justify-between items-center">

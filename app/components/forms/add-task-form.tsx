@@ -2,8 +2,6 @@
 import { Button } from "../ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../ui/input";
-import { Modal } from "../common/modal";
-import { ModalDelete } from "../common/modal-delete-card";
 import { TaskSchema, TaskSchemaProps } from "@/schema/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RootErrorCard } from "../common/root-error-card";
@@ -37,7 +35,6 @@ export const AddTaskForm = ({ skillId }: { skillId: string }) => {
       return setError("root", {
         message: "Unexpected error. Please try again",
       });
-    const result = await res.json();
   };
   return (
     <div className="w-full p-3 border bg-secondary border-secondary-l rounded-xl space-y-3">

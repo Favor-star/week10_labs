@@ -1,5 +1,3 @@
-import { ClassValue } from "clsx";
-import { Book } from "lucide-react";
 import { FC } from "react";
 export const DashboardSummaryCard: FC<{
   info: number;

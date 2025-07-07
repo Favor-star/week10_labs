@@ -65,7 +65,7 @@ export const TaskEditForm: FC<{ task: Task; handleCloseModal: () => void }> = ({
         handleCloseModal();
       }, 2500);
     }
-  }, [isSubmitSuccessful]);
+  }, [isSubmitSuccessful, handleCloseModal, router, reset]);
   return (
     <form
       className="w-full  border flex flex-col gap-5 bg-secondary p-3 rounded-xl border-secondary-xl"

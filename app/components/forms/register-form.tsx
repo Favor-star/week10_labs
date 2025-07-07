@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterSchema, RegisterSchemaProps } from "@/schema/zod";
-import { Loader2, TriangleAlert } from "lucide-react";
+import { Loader2,  } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { RootErrorCard } from "../common/root-error-card";

@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const SkillsTasksCard: FC<{ data: Skill }> = ({ data }) => {
   const { id } = data;
-  //@ts-ignore
+  //@ts-expect-error
   const task = data.task as Task[];
   return (
     <>

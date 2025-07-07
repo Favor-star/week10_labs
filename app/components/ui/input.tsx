@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, InputHTMLAttributes } from "react";
+import React, { FC, InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/app/components/ui/button";
 import { FileQuestion, Home } from "lucide-react";
 import Link from "next/link";

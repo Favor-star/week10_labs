@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Button } from "../ui/button";
 import { SquarePen, Trash } from "lucide-react";
 import { Skill } from "@/generated/prisma";
