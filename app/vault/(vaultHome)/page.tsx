@@ -2,17 +2,19 @@ import { Skill } from "@/generated/prisma";
 import { cookies } from "next/headers";
 import { DashboardSkillCard } from "@/app/components/featureSpecific/dashboard-skill-card";
 import { DashboardSummaryCard } from "@/app/components/featureSpecific/dashboard-summary-card";
-import { notFound } from "next/navigation";
+import { fetchWithErrorHandling } from "@/lib/error-handling";
 
 const page = async () => {
   const cookieStore = await cookies();
-  const res = await fetch(`${process.env.NEXT_URL}/api/skills`, {
-    headers: {
-      cookie: cookieStore.toString(),
-    },
-    cache: "force-cache",
-  });
-  if (!res.ok) notFound();
+  const res = await fetchWithErrorHandling(
+    `${process.env.NEXT_URL}/api/skills`,
+    {
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+      cache: "force-cache",
+    }
+  );
   const data: Skill[] = await res.json();
 
   return (

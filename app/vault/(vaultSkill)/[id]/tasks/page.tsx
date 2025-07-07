@@ -3,18 +3,21 @@ import { TaskCard } from "@/app/components/common/task-card";
 import { AddTaskForm } from "@/app/components/forms/add-task-form";
 import { Skill, Task } from "@/generated/prisma";
 import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
+import { fetchWithErrorHandling } from "@/lib/error-handling";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const cookieStore = await cookies();
-  const res = await fetch(`${process.env.NEXT_URL}/api/skills/${id}`, {
-    headers: {
-      cookie: cookieStore.toString(),
+  const res = await fetchWithErrorHandling(
+    `${process.env.NEXT_URL}/api/skills/${id}`,
+    {
+      headers: {
+        cookie: cookieStore.toString(),
+      },
+      cache: "force-cache",
     },
-    cache: "force-cache",
-  });
-  if (!res.ok) notFound();
+    id
+  );
   const data: Skill = await res.json();
 
   //@ts-ignore
