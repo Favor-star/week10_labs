@@ -8,7 +8,7 @@ export const SkillObjectiveCard: FC<{ data: Skill }> = ({ data }) => {
       <div className=" space-y-3 w-full">
         <h3 className="font-bold text-xl">Learning objectives</h3>
         {objectives.map((obj) => (
-          <p className="space-x-3 flex " key={obj.split(" ")[1]}>
+          <p className="space-x-3 flex " key={obj}>
             <CheckCircle2 strokeWidth={1.3} className="text-green" />
             <span>{obj}</span>
           </p>

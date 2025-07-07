@@ -1,8 +1,10 @@
-import { MoveRight, Plus, Square, SquarePen, Trash } from "lucide-react";
+import { MoveRight, Plus } from "lucide-react";
+import { TaskCard } from "../common/task-card";
 import { FC } from "react";
 import { Button } from "../ui/button";
 import { Skill, Task } from "@/generated/prisma";
 import Link from "next/link";
+
 export const SkillsTasksCard: FC<{ data: Skill }> = ({ data }) => {
   const { id } = data;
   //@ts-ignore
@@ -34,31 +36,5 @@ export const SkillsTasksCard: FC<{ data: Skill }> = ({ data }) => {
         )}
       </div>
     </>
-  );
-};
-
-export const TaskCard: FC<{ task: Task }> = ({ task }) => {
-  const { title, dueDate, id } = task;
-  return (
-    <div className="w-full flex justify-between gap-2 items-center py-2 px-3 border  border-secondary-xl rounded-xl">
-      <div className="flex items-center gap-2">
-        {/* <input type="checkbox" name="skillDone" id="skillDone" /> */}
-        <Square size={20} strokeWidth={1.6} />
-        <div className="">
-          <h2 className="font-bold text-base">{title}</h2>
-          <p className="text-white/60 font-light text-sm">
-            Due: <span>{new Date(dueDate).toDateString()}</span>
-          </p>
-        </div>
-      </div>
-      <div className="flex gap-2 items-center">
-        <button className="text-white/70 p-2">
-          <SquarePen size={20} strokeWidth={1.3} />
-        </button>
-        <button className="text-red">
-          <Trash size={20} strokeWidth={1.3} />
-        </button>
-      </div>
-    </div>
   );
 };

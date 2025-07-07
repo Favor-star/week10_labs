@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { ReflectionSchemaProps } from "@/schema/zod";
+import { TaskSchemaProps } from "@/schema/zod";
 import { NextResponse } from "next/server";
 
 export const PATCH = auth(async function PATCH(
@@ -11,7 +11,7 @@ export const PATCH = auth(async function PATCH(
     return NextResponse.json({ message: "Not authenticated" }, { status: 401 });
   const { id } = await params;
   try {
-    const body: Partial<ReflectionSchemaProps> = await req.json();
+    const body: Partial<TaskSchemaProps> = await req.json();
     const updatedBody = await prisma.task.update({
       data: body,
       where: { id },

@@ -88,7 +88,7 @@ model Skill {
 model Reflection {
   id        String   @id @default(ulid())
   content   String
-  skill     Skill    @relation(fields: [skillId], references: [id])
+  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
   skillId   String
   mood      String
   createdAt DateTime @default(now())
@@ -99,7 +99,7 @@ model Task {
   id        String   @id @default(ulid())
   title     String
   isDone    Boolean  @default(false)
-  skill     Skill    @relation(fields: [skillId], references: [id])
+  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
   skillId   String
   dueDate   DateTime
   createdAt DateTime @default(now())

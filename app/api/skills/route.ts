@@ -4,6 +4,7 @@ import { SkillSchema } from "@/schema/zod";
 import { ZodError } from "zod";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
+import { object, string } from "zod/v4";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth)
@@ -55,5 +56,29 @@ export const POST = auth(async function POST(req) {
     }
     console.error("Unhandled Error:", (error as Error).message);
     return NextResponse.json({ error: "Serverless error" }, { status: 500 });
+  }
+});
+
+export const DELETE = auth(async function DELETE(req) {
+  const json = await req.json();
+  try {
+    const body = object({ id: string() }).parse(json);
+    const { id } = body;
+    const deletedSKill = await prisma.skill.delete({
+      where: { id },
+    });
+    return NextResponse.json(deletedSKill, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        {
+          message: "Invalid data",
+          details: error.errors,
+        },
+        { status: 400 }
+      );
+    }
+    return NextResponse.json({ message: "Server error" }, { status: 500 });
   }
 });

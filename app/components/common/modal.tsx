@@ -1,26 +1,27 @@
+"use client";
 import { cn } from "@/lib";
 import { FC, ReactNode } from "react";
 
 interface ModalProps {
-  handleModalClose?: () => void;
+  handleCloseModal: () => void;
   children: ReactNode;
-  isModalOpen?: boolean;
+  isModalOpen: boolean;
 }
 export const Modal: FC<ModalProps> = ({
-  handleModalClose,
+  handleCloseModal,
   children,
-  isModalOpen = true,
+  isModalOpen = false,
 }) => {
   return (
     <section
       className={cn(
-        "fixed top-0 left-0 h-screen w-screen bg-primary/30 backdrop-blur-sm  transition-all duration-300 origin-center",
+        "fixed top-0 left-0 h-screen w-screen flex items-center justify-center  bg-primary/30 backdrop-blur-sm  transition-all duration-300 origin-center",
         isModalOpen ? "scale-100  z-50" : "scale-0 opacity-0 -z-50"
       )}
-      onClick={handleModalClose}
+      onClick={handleCloseModal}
     >
       <section
-        className="w-full h-full  px-4 flex items-center justify-center"
+        className=" w-full max-w-[700px] flex items-center justify-center px-4 pe-8"
         onClick={(e) => e.stopPropagation()}
       >
         {children}

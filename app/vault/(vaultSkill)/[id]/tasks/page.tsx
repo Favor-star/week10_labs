@@ -1,5 +1,5 @@
 import { SkillSubtitleCard } from "@/app/components/featureSpecific/skills-subtittle-card";
-import { TaskCard } from "@/app/components/featureSpecific/skills-tasks-card";
+import { TaskCard } from "@/app/components/common/task-card";
 import { AddTaskForm } from "@/app/components/forms/add-task-form";
 import { Skill, Task } from "@/generated/prisma";
 import { cookies } from "next/headers";

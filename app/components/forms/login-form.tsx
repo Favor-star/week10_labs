@@ -26,7 +26,6 @@ export const LoginForm = () => {
       redirectTo: "/",
       redirect: false,
     });
-    console.log(res.code);
     if (res.code === "Email doesn't exist") {
       setError("root", { message: "User doesn't exist. Please register!" });
       return;

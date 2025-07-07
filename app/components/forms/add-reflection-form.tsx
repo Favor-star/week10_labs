@@ -19,7 +19,6 @@ export const AddReflectionForm: FC<{ skillId: string }> = ({ skillId }) => {
     resolver: zodResolver(ReflectionSchema),
   });
   const onSubmit: SubmitHandler<ReflectionSchemaProps> = async (data) => {
-    console.log({ newMood: moods[Number(data.mood)].name, ...data });
     const newMood = moods[Number(data.mood)].name;
     const { content } = data;
     const res = await fetch("/api/reflection", {
@@ -81,8 +80,8 @@ export const AddReflectionForm: FC<{ skillId: string }> = ({ skillId }) => {
         <div className="w-full p-3 rounded-xl flex flex-col md:flex-row gap-3 text-green bg-green/20 border ">
           <span className="flex gap-2 w-full  ">
             <CheckCircle size={30} className="w-20 " />
-            Reflection were submitted successfully. You will need to reload the
-            page to see them.
+            Reflection was added successfully. You will need to reload the page
+            to see them.
           </span>
           <div className="w-full flex justify-end">
             <Button
@@ -98,7 +97,7 @@ export const AddReflectionForm: FC<{ skillId: string }> = ({ skillId }) => {
   );
 };
 
-const moods = [
+export const moods = [
   {
     id: "0",
     name: "😊 Happy",

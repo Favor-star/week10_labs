@@ -38,7 +38,6 @@ export const AddTaskForm = ({ skillId }: { skillId: string }) => {
         message: "Unexpected error. Please try again",
       });
     const result = await res.json();
-    console.log(result);
   };
   return (
     <div className="w-full p-3 border bg-secondary border-secondary-l rounded-xl space-y-3">
@@ -83,8 +82,8 @@ export const AddTaskForm = ({ skillId }: { skillId: string }) => {
         <div className="w-full p-3 rounded-xl flex flex-col md:flex-row gap-3 text-green bg-green/20 border ">
           <span className="flex gap-2 w-full  ">
             <CheckCircle size={30} className="w-20 " />
-            Reflection were submitted successfully. You will need to reload the
-            page to see them.
+            Task was added successfully. You will need to reload the page to see
+            them.
           </span>
           <div className="w-full flex justify-end">
             <Button
