@@ -2,6 +2,7 @@ import React from "react";
 import { DashboardSearch } from "@/app/components/forms/dashboard-search";
 import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 const DashboardHeader = () => {
   return (
@@ -12,10 +13,12 @@ const DashboardHeader = () => {
       </div>
       <div className="w-fit flex gap-2">
         <DashboardSearch />
-        <Button className="px-4 text-nowrap">
-          <Plus size={20} />
-          Add skill
-        </Button>
+        <Link href={"/vault/add-skill"}>
+          <Button className="px-4 text-nowrap">
+            <Plus size={20} />
+            Add skill
+          </Button>
+        </Link>
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import { LoginSchema, LoginSchemaProps } from "@/schema/zod";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { RootErrorCard } from "../common/root-error-card";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
   const {
@@ -19,11 +20,12 @@ export const LoginForm = () => {
   } = useForm<LoginSchemaProps>({
     resolver: zodResolver(LoginSchema),
   });
+  const router = useRouter();
   const onSubmit: SubmitHandler<LoginSchemaProps> = async (data) => {
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
-      redirectTo: "/",
+      redirectTo: "/vault",
       redirect: false,
     });
     if (res.code === "Email doesn't exist") {
@@ -34,6 +36,9 @@ export const LoginForm = () => {
       setError("root", { message: "Password is incorect" });
       return;
     }
+    if (res.error)
+      return setError("root", { message: "Unknown error. Please tyr again" });
+    router.push("/vault");
   };
   return (
     <form
