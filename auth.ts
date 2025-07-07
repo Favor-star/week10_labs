@@ -27,5 +27,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
       return session;
     },
+    redirect: async ({ url, baseUrl }) => {
+      // If the URL is a relative path, return it as is
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // If the URL is already a full URL and belongs to the same domain, return it
+      if (new URL(url).origin === baseUrl) return url;
+      // Otherwise, redirect to the vault page after successful login
+      return `${baseUrl}/vault`;
+    },
   },
 });

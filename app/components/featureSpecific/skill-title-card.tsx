@@ -6,17 +6,23 @@ import { Skill } from "@/generated/prisma";
 import { Modal } from "../common/modal";
 import { ModalDelete } from "../common/modal-delete-card";
 import { useModal } from "@/app/hooks/useModal";
+import { SkillEditForm } from "../forms/skill-edit-form";
 
 export const SkillTitleCard: FC<{ data: Skill }> = ({ data }) => {
   const { id, title, description, createdAt } = data;
   const { handleCloseModal, handleOpenModal, isModalOpen } = useModal();
+  const {
+    handleCloseModal: handleSkillClose,
+    handleOpenModal: handleSkillOpen,
+    isModalOpen: isSKillOpen,
+  } = useModal();
   return (
     <>
       <div className="p-5 rounded-xl bg-secondary border border-secondary-l flex flex-col gap-4">
         <div className="flex md:flex-row flex-col gap-3 justify-between items-center">
           <p className="font-extrabold text-2xl md:text-3xl ">{title}</p>
           <div className="flex gap-3">
-            <Button className="">
+            <Button className="" onClick={handleSkillOpen}>
               <SquarePen strokeWidth={1.5} />
               Edit
             </Button>
@@ -45,6 +51,9 @@ export const SkillTitleCard: FC<{ data: Skill }> = ({ data }) => {
       </div>
       <Modal isModalOpen={isModalOpen} handleCloseModal={handleCloseModal}>
         <ModalDelete id={id} type="skill" handleCloseModal={handleCloseModal} />
+      </Modal>
+      <Modal isModalOpen={isSKillOpen} handleCloseModal={handleSkillClose}>
+        <SkillEditForm skill={data} handleCloseModal={handleSkillClose} />
       </Modal>
     </>
   );

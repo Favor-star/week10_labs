@@ -4,7 +4,6 @@ import {} from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { LoginSchema } from "./schema/zod";
 import { prisma } from "./lib/prisma";
-import { error } from "console";
 import { compareHash } from "./lib";
 
 class InvalidEmailError extends CredentialsSignin {
@@ -37,7 +36,7 @@ export default {
           data: { email, password },
         } = loginData;
         const user = await prisma.user.findUnique({ where: { email } });
-        console.log(user)
+        console.log(user);
         if (!user) throw new InvalidEmailError();
         const isPasswordCorrect = await compareHash(password, user.password);
         if (!isPasswordCorrect) return null;
@@ -45,4 +44,7 @@ export default {
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
 } satisfies NextAuthConfig;

@@ -1,8 +1,10 @@
 import { BrainCircuit, LinkIcon, LogIn, UserPlus } from "lucide-react";
 import { Button } from "./components/ui/button";
 import Link from "next/link";
+import { auth } from "@/auth";
 
-export default function Home() {
+export default async function Home() {
+  const data = await auth();
   return (
     <section className="w-full px-4 min-h-screen flex flex-col gap-3 text-white items-center justify-center">
       <div className=""></div>
@@ -13,20 +15,27 @@ export default function Home() {
       <p className="text-white/60 max-w-[400px] w-full text-center">
         Welcome to the SkillVault | your personal skills tracker
       </p>
-      <div className="flex gap-4 items-center justify-center">
-        <Link href={"/register"}>
-          <Button>
-            <UserPlus strokeWidth={1.3} size={18} />
-            Register
-          </Button>
+      {!data && (
+        <div className="flex gap-4 items-center justify-center">
+          <Link href={"/register"}>
+            <Button>
+              <UserPlus strokeWidth={1.3} size={18} />
+              Register
+            </Button>
+          </Link>
+          <Link href={"/login"}>
+            <Button className="bg-transparent border border-accent text-accent hover:bg-accent hover:text-white transition-all">
+              <LogIn strokeWidth={1.3} size={18} />
+              Sign in
+            </Button>
+          </Link>
+        </div>
+      )}
+      {data && (
+        <Link href={"/vault"}>
+          <Button className="mt-10">Go to dashboard</Button>
         </Link>
-        <Link href={"/login"}>
-          <Button className="bg-transparent border border-accent text-accent hover:bg-accent hover:text-white transition-all">
-            <LogIn strokeWidth={1.3} size={18} />
-            Sign in
-          </Button>
-        </Link>
-      </div>
+      )}
     </section>
   );
 }
